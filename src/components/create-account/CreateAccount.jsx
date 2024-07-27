@@ -13,19 +13,31 @@ function CreateAccount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (formData.password === formData.confirmPassword) {
-            try {
-                const response = await axios.post('http://localhost:4000/register', formData);
-                console.log('Response:', response.data);
-                // Handle success (e.g., redirect to login or show a success message)
-            } catch (error) {
-                console.error('Error:', error);
-                // Handle error (e.g., show an error message)
+        try {
+            if(formData.jobsrole === '' )
+                {
+                console.log("object")
             }
-        } else {
-            window.alert('Passwords do not match.');
+            else{
+                if (formData.password === formData.confirmPassword) {
+                    try {
+                        const response = await axios.post('http://localhost:4000/register', formData);
+                        console.log('Response:', response.data.message);
+                        // Handle success (e.g., redirect to login or show a success message)
+                    } catch (error) {
+                        console.error('Error:', error);
+                        // Handle error (e.g., show an error message)
+                    }
+                } else {
+                    window.alert('Passwords do not match.');
+                }
+            }
+            
         }
+        catch (e) {
+            console.log(e)
+        }
+
     };
 
     const handleChange = (e) => {

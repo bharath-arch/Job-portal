@@ -1,25 +1,50 @@
 
 
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Login() {
 
-    const [formdata, setFormdata] = useState({
+    const [formData, setFormData] = useState({
         email: "",
         password: "",
-        type: '',
     })
 
-    const handleClick = () => {
-        alert("hello")
+    const handleClick = async () => {
+    
+        try {
+            if(formData.jobsrole === '' )
+                {
+                window.alert('please select role')
+            }
+            else{
+                if (formData.password === '' || formData.email === '') {
+                    
+                    window.alert('Passwords do Check input field.');
+                } else {
+                    try {
+                        const response = await axios.post('http://localhost:4000/register/login', formData);
+                        console.log('Response:', response.data.message);
+                        // Handle success (e.g., redirect to login or show a success message)
+                    } catch (error) {
+                        console.error('Error:', error);
+                        // Handle error (e.g., show an error message)
+                    }
+                }
+            }
+            
+        }
+        catch (e) {
+            console.log(e)
+        }
+
     }
 
     const handleChange = (e) => {
         e.preventDefault()
-        setFormdata({ ...formdata, [e.target.name]: e.target.value })
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     }
-    console.log(formdata)
     return (
         <>
 
@@ -31,7 +56,7 @@ function Login() {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form action="#" method="POST" className="space-y-6">
+                    <div className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Email address
@@ -52,7 +77,7 @@ function Login() {
                         <div>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Create password
+                                    password
                                 </label>
 
                             </div>
@@ -81,7 +106,7 @@ function Login() {
                         </div>
 
                         <div>
-                            <Link to={"/layout"}>
+                            {/* <Link to={"/layout"}>
                             <button
                                 onClick={handleClick}
                                 type="submit"
@@ -89,9 +114,16 @@ function Login() {
                             >
                                 Login
                             </button>
-                            </Link>
+                            </Link> */}
+                            <button
+                                onClick={handleClick}
+                                type="submit"
+                                className="flex p-2 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Login
+                            </button>
                         </div>
-                    </form>
+                    </div>
 
 
                 </div>
