@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 function CreateAccount() {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ function CreateAccount() {
         confirmPassword: "",
         jobsrole: "",
     });
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +26,21 @@ function CreateAccount() {
                         const response = await axios.post('http://localhost:4000/register', formData);
                         console.log('Response:', response.data.message);
                         // Handle success (e.g., redirect to login or show a success message)
+                        if (response.data.message === 'User created') {
+                            if (formData.jobsrole === 'Job Seeker') {
+
+                                navigate("/layout")
+                            }
+                            else if (formData.jobsrole === 'Job Provider') {
+                                navigate("/admin")
+                            }
+                            else {
+                                toast.error('Please select a role')
+                            }
+                        }
+                        else {
+                            toast.error("Email found please Login")
+                        }
                     } catch (error) {
                         console.error('Error:', error);
                         // Handle error (e.g., show an error message)
@@ -46,6 +63,7 @@ function CreateAccount() {
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+            <Toaster />
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     Create Account
