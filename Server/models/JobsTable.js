@@ -4,11 +4,11 @@ const jobs = mongoose.Schema({
 
     companyName: { type: String },
     HrEmail: { type: String },
+    image: { type: String },
     role: { type: String },
-    package: { type: Number },
-    image : {type : String},
-    jobstype : {type: String}
-
+    Package: { type: Number },
+    jobtype: { type: String },
+    jobsrole: { type: String }
 
 })
 

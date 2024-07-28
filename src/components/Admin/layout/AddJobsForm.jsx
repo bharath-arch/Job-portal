@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 function AddJobsForm() {
@@ -16,19 +18,53 @@ function AddJobsForm() {
         const { name, value, type, files } = e.target;
         setFormData(prevState => ({
             ...prevState,
-            [name]: type === 'file' ? files[0] : value
+            [name]: type === 'file' ? files[0].name : value
         }));
     };
 
     console.log(formData)
 
-    const handleClick = () => {
-        // Handle form submission or button click
+    const handleClick = async () => {
+
+        try {
+            if (formData.companyName === '' ||
+                formData.image === '' ||
+                formData.HrEmail === '' ||
+                formData.role === '' ||
+                formData.Package === '' ||
+                formData.jobtype === '' ||
+                formData.jobsrole === '') {
+
+                toast.error('Please fill out all field')
+            }
+            else {
+                console.log("qqq")
+                const response = await axios.post('http://localhost:4000/addjobs', formData);
+                console.log('Response:', response.data.message);
+                // Handle success (e.g., redirect to login or show a success message)
+
+                if (response.data.message === 'added') {
+                    toast.success('Job Posting added')
+                }
+                else {
+                    toast.error('Please try again')
+                }
+            }
+
+
+
+
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error (e.g., show an error message)
+        }
+
     };
 
     return (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-4xl">
-            <form className="flex flex-col sm:flex-row gap-6">
+            <Toaster />
+            <form className="flex flex-col sm:flex-row gap-6" onSubmit={handleClick}>
                 {/* Left Column: File Upload and Company Details */}
                 <div className="flex-1 space-y-6">
                     <div className="space-y-6">
@@ -111,7 +147,7 @@ function AddJobsForm() {
                             onChange={handleChange}
                             id="package"
                             name="Package"
-                            type="text" // Change to text if package is not numeric
+                            type="number" // Change to text if package is not numeric
                             required
                             autoComplete="package"
                             className="block w-full p-2 mt-1 rounded-md border border-gray-300 shadow-sm focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm"
@@ -155,19 +191,20 @@ function AddJobsForm() {
                         </div>
                     </div>
                 </div>
-            </form>
+                {/* Submit Button */}
+                <div className="mt-6 flex justify-center">
 
-            {/* Submit Button */}
-            <div className="mt-6 flex justify-center">
-                <Link to="/layout">
-                    <button
-                        onClick={handleClick}
+                    <input type='submit' value={'Add Job'}
+                       
                         className="uppercase cursor-pointer font-semibold px-3 py-2 transition-transform duration-300 ease-in-out transform bg-indigo-600 rounded-lg hover:bg-indigo-500 text-white hover:scale-105"
                     >
-                        Add Job
-                    </button>
-                </Link>
-            </div>
+
+                    </input>
+
+                </div>
+            </form>
+
+
         </div>
     );
 }
