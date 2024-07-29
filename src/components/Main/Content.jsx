@@ -46,11 +46,11 @@ function Content() {
                         <div className="p-4 flex items-center">
                             {/* <img alt={item.company} src={item.imageUrl} className="h-24 w-24 rounded-full object-cover mr-4" /> */}
                             <div className="flex-1">
-                                <h2 className="text-xl font-semibold text-gray-900">{item.companyName}</h2>
-                                <p className="text-sm text-gray-600">{item.jobsrole}</p>
-                                <p className="mt-1 text-xs text-gray-500 truncate">{item.jobtype}</p>
-                                <p className="mt-1 text-xs text-gray-500 truncate">{item.Package} Rs</p>
-                                <p className="mt-1 text-xs text-gray-500 truncate">{item.HrEmail}</p>
+                                <h2 className="text-xl font-semibold text-gray-900">Comapny Name : {item.companyName}</h2>
+                                <p className="text-sm text-gray-600">Job Designation: {item.jobsrole}</p>
+                                <p className="mt-1 text-xs text-gray-500 truncate">Job Type: {item.jobtype}</p>
+                                <p className="mt-1 text-xs text-gray-500 truncate">Package : {item.Package} Rs</p>
+                                <p className="mt-1 text-xs text-gray-500 truncate">Contact via :{item.HrEmail}</p>
                             </div>
                         </div>
                         <div className="border-t border-gray-200">
