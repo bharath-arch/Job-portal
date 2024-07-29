@@ -1,10 +1,16 @@
 
 
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 
 function Layout() {
+    const [search, setSearch] = useState()
+
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+    }
+    // console.log(search)
     return (
 
         <>
@@ -39,13 +45,13 @@ function Layout() {
                 </div>
                 <div className="mt-5 flex lg:ml-4 lg:mt-0">
                     <span className="hidden sm:block">
-                        <input type="text" placeholder='search...' className='p-2 border  outline-none' />
+                        <input type="text" placeholder='search...' className='p-2 border  outline-none' onChange={handleChange} />
                         <input type="button" value="Search" className='p-2 border cursor-pointer bg-blue-700 text-white' />
                     </span>
                 </div>
             </div>
             <div className="bg-gray-50 p-6">
-                <Outlet/>
+                <Outlet context={[search, setSearch]} />
             </div>
 
 

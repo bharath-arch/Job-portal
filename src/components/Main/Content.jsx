@@ -1,20 +1,25 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useOutletContext } from 'react-router-dom';
 
 function Content() {
 
+
+    const [search, setSearch] = useOutletContext();
 
     const [company, setCompany] = useState()
     useEffect(() => {
         const datafetch = async () => {
 
             const response = await axios.get('http://localhost:4000/addjobs/getJobData')
-            console.log(response.data.message)
+            // console.log(response.data.message)
             setCompany(response.data.message)
         }
         datafetch()
     })
+
+    // console.log(search)
     return (
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
