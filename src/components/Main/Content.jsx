@@ -24,7 +24,12 @@ function Content() {
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {company?.map((item) => (
+                {company?.filter((item) => {
+                    return (
+                        search.toLowerCase() === "" ? item :
+                            item.companyName.toLowerCase().includes(search.toLowerCase())
+                    );
+                }).map((item) => (
                     <div key={item._id} className="bg-white rounded-lg shadow-md overflow-hidden">
                         <div className="p-4 flex items-center">
                             {/* <img alt={item.company} src={item.imageUrl} className="h-24 w-24 rounded-full object-cover mr-4" /> */}
