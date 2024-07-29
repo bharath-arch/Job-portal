@@ -1,26 +1,4 @@
 
-
-// HrEmail
-// : 
-// "teste@exemplo.us"
-// Package
-// : 
-// 10000
-// companyName
-// : 
-// "www"
-// image
-// : 
-// "Clevertap.webp"
-// jobsrole
-// : 
-// "Full-time"
-// jobtype
-// : 
-// "On-sight"
-// role
-// : 
-// "www
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
