@@ -67,7 +67,7 @@ function AdminLayout() {
       <div className="bg-gray-50 p-6">
         <Outlet />
       </div>
-      <footer className="text-black p-10 bg-gray-100 text-center fixed bottom-0 left-0 w-full">
+      <footer className="text-black p-10 bg-gray-100 text-center  bottom-0 left-0 w-full">
         <p>&copy; 2024 Job Portal. All rights reserved.</p>
       </footer>
 
