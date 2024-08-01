@@ -6,7 +6,7 @@ import { useOutletContext } from 'react-router-dom';
 function Content() {
 
 
-    const [search, setSearch] = useOutletContext();
+    const { search, setSearch, navlink, setNavlink } = useOutletContext();
 
     const [company, setCompany] = useState()
     useEffect(() => {

@@ -5,16 +5,16 @@ function AdminLayout() {
 
   const [navlink, setNavlink] = useState('home')
 
-  const [p, setP] = useState()
+  // const [p, setP] = useState()
 
-  const params = window.location.href.split("/")
-  console.log(params)
-  useEffect(() => {
-    const para = window.location.href.split("/")
-    const len = para.length
-    const paramdata = para[len - 1]
-    setP(paramdata)
-  }, [params])
+  // const params = window.location.href.split("/")
+  // console.log(params)
+  // useEffect(() => {
+  //   const para = window.location.href.split("/")
+  //   const len = para.length
+  //   const paramdata = para[len - 1]
+  //   setP(paramdata)
+  // }, [params])
 
   return (
     <>
