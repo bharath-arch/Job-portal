@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from 'cors'
 import Register from './routes/Register.js'
 import JobsTable from './routes/JobsTable.js'
+import DeleteJobs from './routes/DeleteJob.js'
+
 
 const app = express()
 dotenv.config()
@@ -13,6 +15,7 @@ app.use(express.json());
 
 app.use('/register', Register)
 app.use('/addjobs',JobsTable)
+app.use('/deletejobs',DeleteJobs)
 
 app.listen(process.env.PORT, () => {
     connectMongoDB();

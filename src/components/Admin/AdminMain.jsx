@@ -6,18 +6,28 @@ import React, { useEffect, useState } from 'react'
 function AdminMain() {
 
   const [company, setCompany] = useState()
+  const [complete, setComplete] = useState(true)
   useEffect(() => {
     const datafetch = async () => {
-
       const response = await axios.get('http://localhost:4000/addjobs/getJobData')
+
       // console.log(response.data.message)
       setCompany(response.data.message)
     }
     datafetch()
-  })
-  const handleDelete = (id) => {
-    alert(id)
+  }, [complete])
+  const handleDelete = async (id) => {
+
+    await axios.delete(`http://localhost:4000/deletejobs/${id}`)
+    setComplete(!complete)
   }
+
+  // querry passing
+  // const handleDelete = async (id) => {
+
+  //   const response = await axios.delete(`http://localhost:4000/deletejobs`, { params: { id }, })
+  //   alert(id)
+  // }
 
   return (
     <>

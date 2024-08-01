@@ -24,8 +24,8 @@ function AddJobsForm() {
 
     console.log(formData)
 
-    const handleClick = async () => {
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
             if (formData.companyName === '' ||
                 formData.image === '' ||
@@ -64,7 +64,7 @@ function AddJobsForm() {
     return (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-4xl">
             <Toaster />
-            <form className="flex flex-col sm:flex-row gap-6" onSubmit={handleClick}>
+            <form className="flex flex-col sm:flex-row gap-6" method='POST' onSubmit={handleSubmit} >
                 {/* Left Column: File Upload and Company Details */}
                 <div className="flex-1 space-y-6">
                     <div className="space-y-6">
@@ -195,7 +195,7 @@ function AddJobsForm() {
                 <div className="mt-6 flex justify-center">
 
                     <input type='submit' value={'Add Job'}
-                       
+
                         className="uppercase cursor-pointer font-semibold px-3 py-2 transition-transform duration-300 ease-in-out transform bg-indigo-600 rounded-lg hover:bg-indigo-500 text-white hover:scale-105"
                     >
 
